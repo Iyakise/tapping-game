@@ -1,0 +1,241 @@
+/* load montserate font from google font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
+}
+
+body{
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.__app__interface__{
+    width: 400px;
+    height: 95vh;
+    margin: 0 auto;
+    padding: .5rem 1rem;
+    background-image: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.topsection{
+    height: 120px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    /* border: 2px solid red; */
+}
+
+.ourTap{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.ourTap h1{
+    font-size: 2rem;
+    color: #fff;
+    text-align: center;
+    /* margin-bottom: .3rem; */
+    /* Define your multi-color gradient */
+    background-image: linear-gradient(45deg, orange, yellow);
+  /* Clip the gradient to the text and hide the fallback color */
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  /* Ensure gradient maps tightly to the text */
+  display: inline-block;
+  font-weight: 900;
+}
+
+.ourTap h4{
+    color: #f0f0f0;
+    font-weight: 500;
+}
+
+.topsection h2{
+    text-align: center;
+    align-self: center;
+    justify-self: center;
+    width: 100%;
+    /* border: 2px solid #fff; */
+}
+
+.middelSection{
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 300px;
+    position: relative;
+    /* border: 2px solid #fff; */
+}
+
+.middelSection img{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    cursor: pointer;
+    /* user-drag: none; */
+}
+
+.middelSection img:active{
+    transform: scale(0.9);
+    transition: all 0.3s ease;
+}
+
+.bottomsection{
+    height: 150px;
+    width: 100%;
+    display: flex;
+    /* border: 2px dashed yellow; */
+}
+
+.rangeContainer{
+    width: 100%;
+    height: max-content;
+    /* border: 2px solid teal; */
+}
+
+.rangeContainer h5{
+    text-align: center;
+    color: gold;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rangeContainer .width100{
+    width: 100%;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.5);
+    justify-content: center;
+    border-radius: 20px;
+    padding: 5px;
+}
+
+.rangeContainer .width100 .range{
+    width: 100%;
+    height: 100%;
+    background: purple;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.toolswraper{
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.toolswraper button{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: calc(100% / 5);
+    gap: 5px;
+    padding: 3px 5px;
+    height: 70%;
+}
+
+.toolswraper button .icons{
+   color: purple;
+    transition: all 0.3s ease;
+}
+
+.toolswraper button.active-tap{
+    background: purple;
+    border: none;
+}
+
+.toolswraper button.active-tap .icons,
+.toolswraper button.active-tap .text{
+    color: #fff;
+}
+
+/* .toolswraper button.active-tap .icons{
+    transform: scale(1.2);
+} */
+
+/* .toolswraper button .icons:hover{
+    color: #fff;
+} */
+
+.generatedContent{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    /* flex-direction: column;
+    justify-content: center;
+    align-items: center; */
+    position: absolute;
+    top: 0;
+    z-index: 2;
+    /* background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)); */
+    background-image: linear-gradient(to bottom, #a18cd1 0%, #fbc2eb 100%);
+}
+
+.clickable{
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    background: none;
+}
+
+.slideGenerate{
+    position: absolute;
+    font-weight: 600;
+    z-index: 2;
+    /* make slidup animaiton effect from current positon */
+    animation: slideup 1s ease-in-out;
+    color: purple;
+    font-size: 1.1rem;
+}
+
+@keyframes slideup {
+    /* 0%{
+        transform: translateY(100%);
+    }
+    100%{
+        transform: translateY(-250px);
+    } */
+
+    
+    100% {
+        opacity: 0;
+        top: -40px;
+    }
+}
