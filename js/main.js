@@ -19,7 +19,119 @@ activeTags.forEach(tag => {
         
         let secArea = document.querySelector('.middelSection');
 
-        updateSectionContent(this.getAttribute('tp'), secArea, `<h1>Content for ${this.textContent}</h1><p>This is dynamically generated content for the section.</p>`);
+        if(this.getAttribute('tp') === 'Tap') {
+            // If 'Tap' is clicked, remove the generated content
+            document.querySelector('#generatedContent')?.remove();
+            return;
+        }
+
+        if(this.getAttribute('tp') === 'Boost') {
+            // If 'Tap2' is clicked, remove the generated content  
+            updateSectionContent(this.getAttribute('tp'), 
+            secArea, 
+            `
+            <div class="boostContent">
+                <h4>Boost Your Taps</h4>
+                <div class="boostOptions">
+                    <div class="boostOption">
+                        <span class="boostIcon">
+                            <i class="fas fa-fire fa-2x"></i>
+                        </span>
+                        <div class="boostDetails">
+                            <h5>Tap Speed</h5>
+                            <span class="Gru">3/3</span>
+                        </div>
+                    </div>
+
+                    <div class="boostOption">
+                        <span class="boostIcon">
+                            <i class="fas fa-bolt fa-2x"></i>
+                        </span>
+                        <div class="boostDetails">
+                            <h5>Full Tank</h5>
+                            <span class="Gru">3/3</span>
+                        </div>
+                    </div>
+
+                </div>
+                <h4>Boosters <i class="fas fa-tachometer-alt"></i>:</h4>
+
+                <div class="boosters">
+                    <div class="booster">
+                        <span class="boosterIcon">
+                            <i class="fas fa-hands fa-2x"></i>
+                        </span>
+                        <div class="boosterDetails">
+                            <h5>Multi-tap</h5>
+                            <div class="to-column">
+                                <span class="boosterCount">
+                                    <i class="fas fa-coins"></i>
+                                </span>
+                        
+                                <span class="boosterCount">500</span>
+                                 &ndash;
+                                <span class="Level">3 Level</span>
+                            </div>
+                        </div>
+
+                        <span class="boosterPrice boosterIcon">
+                            <i class="fas fa-angle-right"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="boosters">
+                    <div class="booster">
+                        <span class="boosterIcon">
+                            <i class="fas fa-battery-half fa-2x"></i>
+                        </span>
+                        <div class="boosterDetails">
+                            <h5>Multi-tap</h5>
+                            <div class="to-column">
+                                <span class="boosterCount">
+                                    <i class="fas fa-coins"></i>
+                                </span>
+                        
+                                <span class="boosterCount">500</span>
+                                 &ndash;
+                                <span class="Level">3 Level</span>
+                            </div>
+                        </div>
+
+                        <span class="boosterPrice boosterIcon">
+                            <i class="fas fa-angle-right"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="boosters">
+                    <div class="booster">
+                        <span class="boosterIcon">
+                            <i class="fas fa-bolt fa-2x"></i>
+                        </span>
+                        <div class="boosterDetails">
+                            <h5>Multi-tap</h5>
+                            <div class="to-column">
+                                <span class="boosterCount">
+                                    <i class="fas fa-coins"></i>
+                                </span>
+                        
+                                <span class="boosterCount">500</span>
+                                 &ndash;
+                                <span class="Level">3 Level</span>
+                            </div>
+                        </div>
+
+                        <span class="boosterPrice boosterIcon">
+                            <i class="fas fa-angle-right"></i>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+            `);
+
+        }
     });
 });
 
