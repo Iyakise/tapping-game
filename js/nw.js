@@ -7,7 +7,11 @@ let OurTap = {
     currentTap: 1,
     slider: 500,
     sliderMax: 500,
-    progress: 100
+    progress: 100,
+    fullTank:[3,3],
+    Guru:[3,3],
+    currActiveTap: null, 
+    guruActive: false
 
 };
 

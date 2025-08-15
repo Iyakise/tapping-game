@@ -9,6 +9,7 @@ let gameLevel = document.querySelector('.level');
 let sliderVal = document.querySelector('.currentTapping');
 let sliderMax = document.querySelector('.sliderMax');
 let sliderRange = document.querySelector('.range');
+// let 
 
 // highlight active tags
 let activeTags = document.querySelectorAll('.tapTools');
@@ -33,23 +34,23 @@ activeTags.forEach(tag => {
             <div class="boostContent">
                 <h4>Boost Your Taps</h4>
                 <div class="boostOptions">
-                    <div class="boostOption">
+                    <div class="boostOption tappingSpeed">
                         <span class="boostIcon">
                             <i class="fas fa-fire fa-2x"></i>
                         </span>
                         <div class="boostDetails">
                             <h5>Tap Speed</h5>
-                            <span class="Gru">3/3</span>
+                            <span class="Gru">${obj.Guru[0]}${'/'+ obj.Guru[1]}</span>
                         </div>
                     </div>
 
-                    <div class="boostOption">
+                    <div class="boostOption refiller">
                         <span class="boostIcon">
                             <i class="fas fa-bolt fa-2x"></i>
                         </span>
                         <div class="boostDetails">
                             <h5>Full Tank</h5>
-                            <span class="Gru">3/3</span>
+                            <span class="Tank">${obj.fullTank[0]}${'/'+ obj.fullTank[1]}</span>
                         </div>
                     </div>
 
@@ -70,7 +71,7 @@ activeTags.forEach(tag => {
                         
                                 <span class="boosterCount">500</span>
                                  &ndash;
-                                <span class="Level">3 Level</span>
+                                <span class="Level">0 Level</span>
                             </div>
                         </div>
 
@@ -86,7 +87,7 @@ activeTags.forEach(tag => {
                             <i class="fas fa-battery-half fa-2x"></i>
                         </span>
                         <div class="boosterDetails">
-                            <h5>Multi-tap</h5>
+                            <h5>Energy Limit</h5>
                             <div class="to-column">
                                 <span class="boosterCount">
                                     <i class="fas fa-coins"></i>
@@ -94,7 +95,7 @@ activeTags.forEach(tag => {
                         
                                 <span class="boosterCount">500</span>
                                  &ndash;
-                                <span class="Level">3 Level</span>
+                                <span class="Level">0 Level</span>
                             </div>
                         </div>
 
@@ -110,7 +111,7 @@ activeTags.forEach(tag => {
                             <i class="fas fa-bolt fa-2x"></i>
                         </span>
                         <div class="boosterDetails">
-                            <h5>Multi-tap</h5>
+                            <h5>Recharging speed</h5>
                             <div class="to-column">
                                 <span class="boosterCount">
                                     <i class="fas fa-coins"></i>
@@ -118,7 +119,7 @@ activeTags.forEach(tag => {
                         
                                 <span class="boosterCount">500</span>
                                  &ndash;
-                                <span class="Level">3 Level</span>
+                                <span class="Level">0 Level</span>
                             </div>
                         </div>
 
@@ -131,9 +132,88 @@ activeTags.forEach(tag => {
             </div>
             `);
 
+//tying to select boost and add event
+let boost = document.querySelector('.tappingSpeed');
+let guruUpdate = document.querySelector('.Gru');
+
+let refiller = document.querySelector('.refiller');
+let tank     = document.querySelector('.Tank');
+    boost.addEventListener('click', function(){
+
+        if(obj.guruActive === true){
+            showNotification('Guru is still Active and running, Continue tapping...', 3000);
+            return;
+        }
+       showNotification('You have successfully activated Tap Booster', 3000);
+
+       let guru = obj.Guru;
+       let taping = obj.currentTap * 5;
+       let reduceGuru = guru[0] -= 1;
+
+       obj.currActiveTap = obj.currentTap;
+       obj.Guru[0] = reduceGuru;
+      
+       obj.currentTap = taping;
+       obj.Guru[0] = reduceGuru;
+
+       //trying to set guru active to true
+       obj.guruActive = true;
+
+       //trying to updat guru on this line
+       guruUpdate.innerHTML = reduceGuru + '/' + obj.Guru[1];
+
+       localStorage.setItem('OurTap', JSON.stringify(obj));
+
+      let timout = setTimeout(function(){
+            //update obj.guruActive to false
+            obj.guruActive = false;
+            obj.currentTap = obj.currActiveTap;
+       }, 33000)
+
+    })
+
+
+    //tank refiller
+    refiller.addEventListener('click', function(){
+        showNotification('Thank refill successfully, Continue tapping', 3000);
+
+        let refill = obj.fullTank;
+       let taping = obj.progress = 100;
+       let tankReduce = refill[0] -= 1;
+
+            sliderVal.innerHTML = obj.sliderMax //udpate tap counter to default
+            sliderMax.innerHTML = '/' + obj.sliderMax; //updat max
+
+            sliderRange.style.width = taping + '%'; //update range
+            obj.fullTank[0] = tankReduce;
+
+            tank.innerHTML = `${tankReduce}${'/' + 3}`;
+
+
+
+        localStorage.setItem('OurTap', JSON.stringify(obj));
+    })
+
+
+
         }
     });
 });
+
+//function tot genereate notificaqtion
+function showNotification(text, time){
+    let notiwrap = document.createElement('div');
+        notiwrap.className = '_notification_';
+        notiwrap.innerHTML = `
+            <div class="__txtwrap__">
+                <h4>${text}</h4>
+            </div>
+        `
+    document.querySelectorAll('.tpx')[0].appendChild(notiwrap);// notification wrapper
+    setTimeout(function(){
+        notiwrap.remove();
+    }, time)
+}
 
 
 //update section content
@@ -185,9 +265,17 @@ function InitializeTap(){
         balance.innerHTML = obj.balance;
      //   console.log(typeof obj.balance);
 
-        let reduceVal = obj.slider -= 5;
-        obj.sliderVal = reduceVal;
-         sliderVal.innerHTML = reduceVal;
+        if(!obj.guruActive){
+            let reduceVal = obj.slider -= 5;
+            obj.sliderVal = reduceVal;
+            sliderVal.innerHTML = reduceVal;
+
+
+             let currentSLiderPosition = obj.progress - 1;
+                obj.progress = currentSLiderPosition;
+                sliderRange.style.width = currentSLiderPosition + '%';
+        }
+        
             // console.log('x:', x, 'y:', y);
         //settimout to remove the span after 2 seconds
         setTimeout(() => {
@@ -197,9 +285,7 @@ function InitializeTap(){
         spanGenerate.style.top = `${y}px`;
         clickableContainer.appendChild(spanGenerate);
 
-        let currentSLiderPosition = obj.progress - 1;
-        obj.progress = currentSLiderPosition;
-        sliderRange.style.width = currentSLiderPosition + '%';
+       
         // You can add more functionality here, like changing the image or triggering an animation.
         
         //update balance
